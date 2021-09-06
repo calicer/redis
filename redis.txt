@@ -1,0 +1,122 @@
+root@Avish-PREDATOR:~# redis-cli
+127.0.0.1:6379> quir
+(error) ERR unknown command `quir`, with args beginning with:
+127.0.0.1:6379> quit
+root@Avish-PREDATOR:~# redis-cli
+127.0.0.1:6379> set name vishal
+OK
+127.0.0.1:6379> get name
+"vishal"
+127.0.0.1:6379> set age 26
+OK
+127.0.0.1:6379> get age
+"26"
+127.0.0.1:6379> del age
+(integer) 1
+127.0.0.1:6379> get age
+(nil)
+127.0.0.1:6379> exists name
+(integer) 1
+127.0.0.1:6379> exists nanj
+(integer) 0
+127.0.0.1:6379> key *
+(error) ERR unknown command `key`, with args beginning with: `*`,
+127.0.0.1:6379> keys *
+1) "name"
+127.0.0.1:6379> flushall
+OK
+127.0.0.1:6379> keys *
+(empty list or set)
+127.0.0.1:6379> set name vishal
+OK
+127.0.0.1:6379> ttl name
+(integer) -1
+127.0.0.1:6379> expire name 10
+(integer) 1
+127.0.0.1:6379> get name
+"vishal"
+127.0.0.1:6379> get name
+"vishal"
+127.0.0.1:6379> ttl name
+(integer) -2
+127.0.0.1:6379> setex name 10 vishal
+OK
+127.0.0.1:6379> ttl name
+(integer) 2
+127.0.0.1:6379> ttl name
+(integer) -2
+127.0.0.1:6379> get name
+(nil)
+127.0.0.1:6379> lpush name friends john
+(integer) 2
+127.0.0.1:6379> get friends
+(nil)
+127.0.0.1:6379> get name
+(error) WRONGTYPE Operation against a key holding the wrong kind of value
+127.0.0.1:6379> lrange name 0 -1
+1) "john"
+2) "friends"
+127.0.0.1:6379> lpush name avish
+(integer) 3
+127.0.0.1:6379> lrange name
+(error) ERR wrong number of arguments for 'lrange' command
+127.0.0.1:6379> lrange name 0 -1
+1) "avish"
+2) "john"
+3) "friends"
+127.0.0.1:6379> lpop name
+"avish"
+127.0.0.1:6379> lrange name 0 -1
+1) "john"
+2) "friends"
+127.0.0.1:6379> sadd hobbies calisthenics
+(integer) 1
+127.0.0.1:6379> smembers
+(error) ERR wrong number of arguments for 'smembers' command
+127.0.0.1:6379> smembers hobbies
+1) "calisthenics"
+127.0.0.1:6379> sadd hobbies calisthenics
+(integer) 0
+127.0.0.1:6379> smembers hobbies
+1) "calisthenics"
+127.0.0.1:6379> srem hobbies calisthenics
+(integer) 1
+127.0.0.1:6379> smembers hobies
+(empty list or set)
+127.0.0.1:6379> smembers hobbies
+(empty list or set)
+127.0.0.1:6379> hset person name vishal
+(integer) 1
+127.0.0.1:6379> hget person name
+"vishal"
+127.0.0.1:6379> hget person
+(error) ERR wrong number of arguments for 'hget' command
+127.0.0.1:6379> hgetall person
+1) "name"
+2) "vishal"
+127.0.0.1:6379> hset peron age 24
+(integer) 1
+127.0.0.1:6379> hgetall
+(error) ERR wrong number of arguments for 'hgetall' command
+127.0.0.1:6379> hgetall person
+1) "name"
+2) "vishal"
+127.0.0.1:6379> hset person age 24
+(integer) 1
+127.0.0.1:6379> hgetall person
+1) "name"
+2) "vishal"
+3) "age"
+4) "24"
+127.0.0.1:6379> hget person keys
+(nil)
+127.0.0.1:6379> hget person age
+"24"
+127.0.0.1:6379> hdel person age
+(integer) 1
+127.0.0.1:6379> hexists person age
+(integer) 0
+127.0.0.1:6379> hgetall person
+1) "name"
+2) "vishal"
+127.0.0.1:6379>
